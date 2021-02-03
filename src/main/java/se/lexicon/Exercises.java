@@ -19,9 +19,11 @@ public class Exercises {
     */
     public static void exercise1(String message){
         System.out.println(message);
+
         Predicate<Person> findNameCondition = p -> p.getFirstName().equalsIgnoreCase("Erik");
         List<Person> personWithErikName =  storage.findMany(findNameCondition);
         personWithErikName.forEach(p -> System.out.println(p));
+
         System.out.println("----------------------");
     }
 
@@ -32,6 +34,7 @@ public class Exercises {
      */
     public static void exercise2(String message){
         System.out.println(message);
+
         Predicate<Person> findCondition = p -> p.getGender().name().equals("FEMALE");
         List<Person> personFemales =  storage.findMany(findCondition);
         personFemales.forEach(p -> System.out.println(p));
@@ -46,8 +49,12 @@ public class Exercises {
      */
     public static void exercise3(String message){
         System.out.println(message);
-        //Write your code here
 
+        LocalDate date = LocalDate.parse("2000-01-01");
+        Predicate<Person> findCondition = p -> p.getBirthDate().isBefore(date);
+        List<Person> personResult =  storage.findMany(findCondition);
+
+        personResult.forEach(p -> System.out.println(p));
         System.out.println("----------------------");
     }
 
