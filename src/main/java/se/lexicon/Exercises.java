@@ -65,7 +65,10 @@ public class Exercises {
      */
     public static void exercise4(String message){
         System.out.println(message);
-        //Write your code here
+
+        Predicate<Person> findCondition = p -> p.getId() == 123;
+        Person personResult =  storage.findOne(findCondition);
+        System.out.println(personResult.toString());
 
         System.out.println("----------------------");
 
