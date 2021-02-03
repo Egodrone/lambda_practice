@@ -1,16 +1,20 @@
 package se.lexicon;
 
+
+
 import se.lexicon.data.DataStorage;
 import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
-
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+
 
 public class Exercises {
 
@@ -24,8 +28,8 @@ public class Exercises {
 
         Predicate<Person> findNameCondition = p -> p.getFirstName().equalsIgnoreCase("Erik");
         List<Person> personWithErikName =  storage.findMany(findNameCondition);
-        personWithErikName.forEach(p -> System.out.println(p));
 
+        personWithErikName.forEach(p -> System.out.println(p));
         System.out.println("----------------------");
     }
 
@@ -39,8 +43,8 @@ public class Exercises {
 
         Predicate<Person> findCondition = p -> p.getGender().name().equals("FEMALE");
         List<Person> personFemales =  storage.findMany(findCondition);
-        personFemales.forEach(p -> System.out.println(p));
 
+        personFemales.forEach(p -> System.out.println(p));
         System.out.println("----------------------");
     }
 
@@ -70,10 +74,9 @@ public class Exercises {
 
         Predicate<Person> findCondition = p -> p.getId() == 123;
         Person personResult =  storage.findOne(findCondition);
+
         System.out.println(personResult.toString());
-
         System.out.println("----------------------");
-
     }
 
 
@@ -175,12 +178,13 @@ public class Exercises {
      */
     public static void exercise10(String message){
         System.out.println(message);
+
         Predicate<Person> personFirstNamePalindrome = person -> new StringBuilder(person.getFirstName())
                 .reverse().toString().equalsIgnoreCase(person.getFirstName());
 
         Consumer<Person> printer = person -> System.out.println(person.getFirstName() + " " + person.getLastName());
-        storage.findAndDo(personFirstNamePalindrome, printer);
 
+        storage.findAndDo(personFirstNamePalindrome, printer);
         System.out.println("----------------------");
     }
 
@@ -191,19 +195,29 @@ public class Exercises {
      */
     public static void exercise11(String message){
         System.out.println(message);
-        //Write your code here
 
+
+        Predicate<Person> findCondition = p -> p.getFirstName()
+                .toLowerCase(Locale.ROOT)
+                .startsWith("a");
+
+        Comparator<Person> sortB = (o1, o2) -> o2.getBirthDate()
+                .compareTo(o1.getBirthDate());
+        List<Person> result = storage.findAndSort(findCondition, sortB);
+
+        result.forEach(System.out::println);
         System.out.println("----------------------");
     }
 
 
 
     /*
-        12.	Using findAndSort() find everyone born before 1950 sorted reversed by lastest to earliest.
+        12.	Using findAndSort() find everyone born before 1950 sorted reversed by latest to earliest.
      */
     public static void exercise12(String message){
         System.out.println(message);
-        //Write your code here
+
+
 
         System.out.println("----------------------");
     }
@@ -215,7 +229,8 @@ public class Exercises {
      */
     public static void exercise13(String message){
         System.out.println(message);
-        //Write your code here
+
+
 
         System.out.println("----------------------");
     }
