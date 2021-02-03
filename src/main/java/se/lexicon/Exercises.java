@@ -1,6 +1,7 @@
 package se.lexicon;
 
 import se.lexicon.data.DataStorage;
+import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 
 import java.time.LocalDate;
@@ -103,8 +104,13 @@ public class Exercises {
      */
     public static void exercise6(String message){
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> findCondition = p -> p.getGender() == Gender.MALE &&
+                p.getFirstName().toLowerCase().startsWith("e");
+        Function<Person, String> mapper =  p -> p.toString();
+        List<String> personResult = storage.findManyAndMapEachToString(findCondition, mapper);
+
+        personResult.forEach(System.out::println);
         System.out.println("----------------------");
     }
 
