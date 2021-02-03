@@ -7,6 +7,7 @@ import se.lexicon.model.Person;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -122,11 +123,13 @@ public class Exercises {
      */
     public static void exercise7(String message){
         System.out.println(message);
+
         Function<Person, String> mapper = p ->
                 p.getFirstName() + " " + p.getLastName() + " "
                         + Period.between(p.getBirthDate(), LocalDate.now()) + "years";
 
         Predicate<Person> pp = p -> Period.between(p.getBirthDate(), LocalDate.now()).getYears() < 10;
+
         List<String> result = storage.findManyAndMapEachToString(pp, mapper);
         System.out.println("----------------------");
     }
@@ -138,7 +141,12 @@ public class Exercises {
      */
     public static void exercise8(String message){
         System.out.println(message);
-        //Write your code here
+
+        Predicate<Person> findCondition = p -> p.getFirstName()
+                .toLowerCase(Locale.ROOT)
+                .equalsIgnoreCase("ulf");
+        Consumer<Person> printPerson = p -> System.out.println(p.toString());
+        storage.findAndDo(findCondition, printPerson);
 
         System.out.println("----------------------");
     }
