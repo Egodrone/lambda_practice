@@ -19,21 +19,22 @@ public class Exercises {
     */
     public static void exercise1(String message){
         System.out.println(message);
-        Predicate<Person> findNameCondition = person -> person.getFirstName().equalsIgnoreCase("Erik");
+        Predicate<Person> findNameCondition = p -> p.getFirstName().equalsIgnoreCase("Erik");
         List<Person> personWithErikName =  storage.findMany(findNameCondition);
-        personWithErikName.forEach(person -> System.out.println(person));
+        personWithErikName.forEach(p -> System.out.println(p));
         System.out.println("----------------------");
     }
 
 
 
     /*
-        2.	Find all females in the collection using findMany().
+      2.	Find all females in the collection using findMany().
      */
     public static void exercise2(String message){
         System.out.println(message);
-        //storage.findMany(findNameCondition);
-        //Write your code here
+        Predicate<Person> findCondition = p -> p.getGender().name().equals("FEMALE");
+        List<Person> personFemales =  storage.findMany(findCondition);
+        personFemales.forEach(p -> System.out.println(p));
 
         System.out.println("----------------------");
     }
