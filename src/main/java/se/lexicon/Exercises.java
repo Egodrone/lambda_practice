@@ -82,8 +82,17 @@ public class Exercises {
      */
     public static void exercise5(String message){
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> findCondition = p -> p.getId() == 456;
+        Function<Person, String> mapper = p ->  " Name:  " +
+                p.getFirstName() + " "
+                + p.getLastName()
+                + " born "
+                + p.getBirthDate();
+
+        String personResult = storage.findOneAndMapToString(findCondition, mapper);
+
+        System.out.println(personResult);
         System.out.println("----------------------");
     }
 
