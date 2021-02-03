@@ -1,8 +1,11 @@
 package se.lexicon;
 
+
+
 import java.util.Scanner;
 
 import static se.lexicon.Exercises.*;
+
 
 
 public class App 
