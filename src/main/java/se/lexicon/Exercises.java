@@ -146,8 +146,8 @@ public class Exercises {
                 .toLowerCase(Locale.ROOT)
                 .equalsIgnoreCase("ulf");
         Consumer<Person> printPerson = p -> System.out.println(p.toString());
-        storage.findAndDo(findCondition, printPerson);
 
+        storage.findAndDo(findCondition, printPerson);
         System.out.println("----------------------");
     }
 
@@ -158,8 +158,13 @@ public class Exercises {
      */
     public static void exercise9(String message){
         System.out.println(message);
-        //Write your code here
 
+        Predicate<Person> findCondition = p -> p.getLastName()
+                .toLowerCase(Locale.ROOT)
+                .contains(p.getFirstName().toLowerCase(Locale.ROOT));
+        Consumer<Person> printPerson = p -> System.out.println(p.toString());
+
+        storage.findAndDo(findCondition, printPerson);
         System.out.println("----------------------");
     }
 
