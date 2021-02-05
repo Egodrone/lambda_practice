@@ -196,7 +196,6 @@ public class Exercises {
     public static void exercise11(String message){
         System.out.println(message);
 
-
         Predicate<Person> findCondition = p -> p.getFirstName()
                 .toLowerCase(Locale.ROOT)
                 .startsWith("a");
@@ -217,7 +216,13 @@ public class Exercises {
     public static void exercise12(String message){
         System.out.println(message);
 
+        LocalDate date = LocalDate.parse("1950-01-01");
+        Predicate<Person> findCondition = p -> p.getBirthDate().isBefore(date);
+        Comparator<Person> sortP = (o1, o2) -> o2.getBirthDate()
+                .compareTo(o1.getBirthDate());
 
+        List<Person> result = storage.findAndSort(findCondition, sortP);
+        result.forEach(System.out::println);
 
         System.out.println("----------------------");
     }
@@ -230,7 +235,12 @@ public class Exercises {
     public static void exercise13(String message){
         System.out.println(message);
 
+        Comparator<Person> sortP = Comparator.comparing(Person::getLastName)
+                .thenComparing(Person::getFirstName)
+                .thenComparing(Person::getBirthDate);
 
+        List<Person> result = storage.findAndSort(sortP);
+        result.forEach(System.out::println);
 
         System.out.println("----------------------");
     }
