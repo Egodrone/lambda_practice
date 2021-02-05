@@ -6,7 +6,6 @@ import se.lexicon.data.DataStorage;
 import se.lexicon.model.Gender;
 import se.lexicon.model.Person;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -129,11 +128,12 @@ public class Exercises {
 
         Function<Person, String> mapper = p ->
                 p.getFirstName() + " " + p.getLastName() + " "
-                        + Period.between(p.getBirthDate(), LocalDate.now()) + "years";
-
-        Predicate<Person> pp = p -> Period.between(p.getBirthDate(), LocalDate.now()).getYears() < 10;
+                        + (LocalDate.now().getYear() - p.getBirthDate().getYear()) + " years";
+        Predicate<Person> pp = p -> LocalDate.now().getYear() - p.getBirthDate().getYear() <10;
 
         List<String> result = storage.findManyAndMapEachToString(pp, mapper);
+        result.forEach(System.out::println);
+
         System.out.println("----------------------");
     }
 
